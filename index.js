@@ -1,3 +1,5 @@
+
+
 function decodeInput(input) {
     return "Decoded Input comes out here"
 }
@@ -12,3 +14,9 @@ function getContractAddress(decodedInput, walletAddress){
 }
 
 consoleLogDecodedInput()
+
+module.exports = {
+    decodeInput,
+    consoleLogDecodedInput,
+    getContractAddress
+}
