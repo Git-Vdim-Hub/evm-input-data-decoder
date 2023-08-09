@@ -7,7 +7,9 @@ fetchAndProcessApiResponse(url);
 async function fetchAndProcessApiResponse(apiUrl) {
     try {
         const response = await axios.get(apiUrl);
-        return decodeInput(response?.data?.result);
+        consoleLogDecodedInput(response?.data?.result);
+        getContractAddress(response?.data?.result);
+        return response?.data?.result;
     } catch (error) {
         throw new Error('Failed to fetch or process API response: ' + error.message);
     }
@@ -31,19 +33,28 @@ function decodeInput(resultArray) {
         processedResults.push(resultItem);
     }
 
-    console.log(processedResults);
-    // return processedResults;
+    return processedResults;
 
 }
 
 
-function consoleLogDecodedInput() {
-    console.log(decodeInput())
+function consoleLogDecodedInput(resultArray) {
+    console.log(decodeInput(resultArray));
 }
 
-function getContractAddress(decodedInput, walletAddress) {
-    console.log("Pikachu")
-    return "contract address will be output from here"
+function getContractAddress(apiResponseArray) {
+    const contractAddresses = [];
+
+    for (const apiResponse of apiResponseArray) {
+        const input = apiResponse.input;
+        const contractAddressStartIndex = input.lastIndexOf('000000000000000000000000') + '000000000000000000000000'.length;
+        const contractAddressHex = input.substring(contractAddressStartIndex, contractAddressStartIndex + 40);
+        const contractAddress = '0x' + contractAddressHex;
+        contractAddresses.push(contractAddress);
+    }
+
+    console.log("CA", contractAddresses);
+    return contractAddresses;
 }
 
 module.exports = {
