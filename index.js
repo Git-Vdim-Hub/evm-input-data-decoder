@@ -1,6 +1,6 @@
 const Web3 = require('web3');
 
-const input = "0x8803dbee000000000000000000000000000000000000000000000001158e460913d000000000000000000000000000000000000000000000000000000ca9af2410d07d1c00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee10000000000000000000000000000000000000000000000000000000060524ad50000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2000000000000000000000000990f341946a3fdb507ae7e52d17851b87168017c" // Example input for a "transfer" function
+const input = "0x7ff36ab500000000000000000000000000000000000000000000048fd9b015d231b091770000000000000000000000000000000000000000000000000000000000000080000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee10000000000000000000000000000000000000000000000000000000061b2b7e40000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000056a86d648c435dc707c8405b78e2ae8eb4e60ba4" // Example input for a "transfer" function
 
 consoleLogDecodedInput();
 
@@ -57,10 +57,24 @@ function getContractAddress(input_data) {
         }
     }
 
-    // Check for `approve(address _spender, uint256 _value)`
-    if (input_data.startsWith('0x095ea7b3')) {
-        const tokenAddress = '0x' + input_data.slice(34, 74);
-        return tokenAddress;
+    // Check for method ID matching swapExactETHForTokens
+    if (input_data.startsWith("0x7ff36ab5")) {
+        const params = Web3.eth.abi.decodeParameters(
+            [
+                'uint256',
+                'address[]',
+                'address',
+                'uint256'
+            ],
+            '0x' + input_data.slice(10) // Remove the method ID
+        );
+
+        if (Array.isArray(params['1']) && params['1'].length > 0) {
+            const tokenAddress = params['1'][params['1'].length - 1]; // Last address in path
+            return tokenAddress;
+        } else {
+            console.log("Unable to find the token contract address in the given input data");
+        }
     }
 
     // Check for `transfer(address _to, uint256 _value)`
