@@ -26,6 +26,7 @@ function consoleLogDecodedInput() {
 
 function getContractAddress(input_data) {
     let tokenAddress = null;
+
     // Check for `swapETHForExactTokens`
     if (input_data.startsWith('0xfb3bdb41')) {
         const tokenAddress = '0x' + input_data.slice(-40);
