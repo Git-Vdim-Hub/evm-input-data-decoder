@@ -1,4 +1,6 @@
-const input = "0xfb3bdb410000000000000000000000000000000000000000000002f6f10780d22cc000000000000000000000000000000000000000000000000000000000000000000080000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee10000000000000000000000000000000000000000000000000000000060691d920000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000000000000000000000009f9c8ec3534c3ce16f928381372bfbfbfb9f4d24" // Example input for a "transfer" function
+const Web3 = require('web3');
+
+const input = "0x8803dbee000000000000000000000000000000000000000000000001158e460913d000000000000000000000000000000000000000000000000000000ca9af2410d07d1c00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee10000000000000000000000000000000000000000000000000000000060524ad50000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2000000000000000000000000990f341946a3fdb507ae7e52d17851b87168017c" // Example input for a "transfer" function
 
 consoleLogDecodedInput();
 
@@ -30,6 +32,31 @@ function getContractAddress(input_data) {
         return tokenAddress;
     }
 
+    // Handle swapTokensForExactTokens
+    if (input_data.startsWith("0x8803dbee")) {
+        const params = Web3.eth.abi.decodeParameters(
+            [
+                'uint256', // amountOut
+                'uint256', // amountInMax
+                'address[]', // path
+                'address', // to
+                'uint256' // deadline
+            ],
+            '0x' + input_data.slice(10) // Remove the method ID
+        );
+
+        // params will now contain the values for amountOut, amountInMax, path, to, and deadline
+        const pathArray = params['2']; // This will give you the array containing the addresses
+        const tokenAddress = pathArray[pathArray.length - 1]; // Last address in path may be the token contract address
+
+        if (tokenAddress) {
+            return tokenAddress;
+        } else {
+            console.log("Unable to find the token contract address in the given input data");
+            return null;
+        }
+    }
+
     // Check for `approve(address _spender, uint256 _value)`
     if (input_data.startsWith('0x095ea7b3')) {
         const tokenAddress = '0x' + input_data.slice(34, 74);
@@ -47,6 +74,9 @@ function getContractAddress(input_data) {
         const tokenAddress = '0x' + input_data.slice(34, 74);
         return tokenAddress;
     }
+
+
+
 
     // If you have additional function signatures, add them here...
 
