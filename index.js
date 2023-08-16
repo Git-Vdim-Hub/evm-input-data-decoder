@@ -1,6 +1,6 @@
 const Web3 = require('web3');
 
-const input = "0x38ed17390000000000000000000000000000000000000000000000000000000165a0bc00000000000000000000000000000000000000000000000004dbab6733677e9cf800000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee100000000000000000000000000000000000000000000000000000000604913f70000000000000000000000000000000000000000000000000000000000000003000000000000000000000000dac17f958d2ee523a2206206994597c13d831ec7000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2000000000000000000000000990f341946a3fdb507ae7e52d17851b87168017c" // Example input for a "transfer" function
+const input = "0xa9059cbb000000000000000000000000d29d9809dca47c042cf05e81ed89bf3575a19ed20000000000000000000000000000000000000000000000015feb38d41d13ceea" // Example input for a "transfer" function
 
 consoleLogDecodedInput();
 
@@ -99,17 +99,89 @@ function getContractAddress(input_data) {
         return tokenAddress;
     }
 
-    // Check for `transfer(address _to, uint256 _value)`
-    if (input_data.startsWith('0xa9059cbb')) {
-        const tokenAddress = '0x' + input_data.slice(34, 74);
+    // Check for swapExactTokensForETH(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline)
+    if (input_data.startsWith("0x18cbafe5")) {
+        const params = Web3.eth.abi.decodeParameters(
+            ['uint256', 'uint256', 'address[]', 'address', 'uint256'],
+            '0x' + input_data.slice(10) // Remove the method ID
+        );
+
+        // Check if the path array exists and is not empty
+        if (params[2] && Array.isArray(params[2]) && params[2].length > 0) {
+            const tokenAddress = params[2][0]; // First address in path is the token contract address
+            return tokenAddress;
+        }
+    }
+
+    //check for swap(string aggregatorId, address tokenFrom, uint256 amount, bytes data)
+    if (input_data.startsWith("0x5f575529")) {
+        const params = Web3.eth.abi.decodeParameters(
+            [
+                'string',
+                'address',
+                'uint256',
+                'bytes'
+            ],
+            '0x' + input_data.slice(10) // Remove the method ID
+        );
+
+        // params now contain the values for aggregatorId, tokenFrom, amount, and data
+        const tokenAddress = params[1];
+
         return tokenAddress;
     }
 
-    // Check for `setApprovalForAll(address operator, bool authorized)`
-    if (input_data.startsWith('0xa22cbfa3')) {
-        const tokenAddress = '0x' + input_data.slice(34, 74);
+    // check for swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline)
+    if (input_data.startsWith("0x5c11d795")) {
+        const params = Web3.eth.abi.decodeParameters(
+            ['uint256', 'uint256', 'address[]', 'address', 'uint256'],
+            '0x' + input_data.slice(10)
+        );
+
+        if (params[2] && Array.isArray(params[2]) && params[2].length > 0) {
+            const tokenAddress = params[2][0]; // First address in the path array
+            return tokenAddress;
+        }
+    }
+
+
+    //check for swapExactTokensForETHSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline)
+    if (input_data.startsWith("0x791ac947")) {
+        const params = Web3.eth.abi.decodeParameters(
+            ['uint256', 'uint256', 'address[]', 'address', 'uint256'],
+            '0x' + input_data.slice(10)
+        );
+
+        if (params[2] && Array.isArray(params[2]) && params[2].length > 0) {
+            const tokenAddress = params[2][0]; // First address in the path array
+            return tokenAddress;
+        }
+    }
+
+    // check for swapExactTempleForStable(uint256 amountIn, uint256 amountOutMin, address stable, address to, uint256 deadline)
+    if (input_data.startsWith("0xe94e36b9")) {
+        const params = Web3.eth.abi.decodeParameters(
+            ['uint256', 'uint256', 'address', 'address', 'uint256'],
+            '0x' + input_data.slice(10)
+        );
+
+        const tokenAddress = params[2]; // Address of the 'stable' parameter
         return tokenAddress;
     }
+
+    // Check for `transfer(address _to, uint256 _value)`
+    // if (input_data.startsWith('0xa9059cbb')) {
+    //     const tokenAddress = '0x' + input_data.slice(34, 74);
+    //     return tokenAddress;
+    // }
+
+    // Check for `setApprovalForAll(address operator, bool authorized)`
+    // if (input_data.startsWith('0xa22cbfa3')) {
+    //     const tokenAddress = '0x' + input_data.slice(34, 74);
+    //     return tokenAddress;
+    // }
+
+
 
     // If you have additional function signatures, add them here...
 
@@ -120,7 +192,7 @@ function getContractAddress(input_data) {
 if (tokenAddress) {
     console.log('Token Contract Address:', tokenAddress);
 } else {
-    console.log('Unable to find the token contract address in the given input data');
+    console.log('Dependency does not support this transaction');
 }
 
 
