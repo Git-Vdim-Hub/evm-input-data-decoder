@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Git-Vdim-Hub/evm-input-data-decoder/issues"
   },
-  "homepage": "https://github.com/Git-Vdim-Hub/evm-input-data-decoder#readme"
+  "homepage": "https://github.com/Git-Vdim-Hub/evm-input-data-decoder#readme",
+  "dependencies": {
+    "web3": "^4.0.3"
+  }
 }
