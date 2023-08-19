@@ -5,8 +5,8 @@ This npm package helps decode Ethereum transaction input data and extracts token
 
 ## Features
 
-- Decode Input: Extracts method id and parameters from ABI encoded data.
-- Get Contract Address: Identifies and extracts the token contract address from a variety of well-known function signatures.
+- Decode Input: Extracts method id and parameters from input string from an EVM transaction.
+- Get Contract Address: Identifies and extracts the token contract address from a variety of well-known function signatures including (list all functions here).
 
 
 
@@ -24,28 +24,27 @@ Install evm-input-data-decoder with npm
 //Initialize
 const Web3 = require('web3');
 
-//input data you want to decode
+//example input data you want to decode
 const input = "0x7ff36ab5000000000000000000000000000000000000000000002d7c2e7091125587a8df0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee100000000000000000000000000000000000000000000000000000000601892860000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000000000000000000000003affcca64c2a6f4e3b6bd9c64cd2c969efd1ecbe" // Example input for a "transfer" function
+
+decodeInput(input)
+//returns an object of methodId String and input parameters Array
+
+//returns
+//{
+  //methodId: '0x7ff36ab5',
+  //params: [
+    //'0x00000
+
 
 // Decode Input Data
 consoleLogDecodedInput()
 
+
+
 // Get Contract Address
 consoleLogGetContractAddress()
 
-function decodeInput(input_data) {
-    const methodId = input_data.slice(0, 10);
-    const params = [];
-
-    for (let i = 10; i < input_data.length; i += 64) {
-        params.push(input_data.slice(i, i + 64));
-    }
-
-    return {
-        methodId: methodId,
-        params: params
-    };
-}
 
 function consoleLogDecodedInput() {
     console.log(decodeInput(input))
@@ -284,8 +283,9 @@ Call the function directly without any parameters to see the extracted token con
 
 ## Contributing
 
-Contributions are always welcome!
-
+[Vadim](https://github.com/Git-Vdim-Hub)
+[Rony]
+[Nowra]
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
