@@ -17,7 +17,7 @@ Install evm-input-data-decoder with npm
 ```bash
   npm install evm-input-data-decoder --save
 ```
-    
+
 ## Usage/Examples
 
 ```javascript
@@ -227,8 +227,7 @@ module.exports = {
     consoleLogGetContractAddress
 }
 
-
-
+```
 ## Appendix
 
 This section provides a detailed breakdown of the main functions and utility functions available in the package.
@@ -283,15 +282,9 @@ Usage:
 
 Call the function directly without any parameters to see the extracted token contract address or the relevant error message printed to the console.
 
-
-
-
 ## Contributing
 
 Contributions are always welcome!
-
-
-
 
 ## License
 
@@ -301,4 +294,3 @@ Contributions are always welcome!
 ## Disclaimer
 
 Please make sure to test this library extensively before using it in a production environment. Ensure the decoded data and extracted addresses align with your expectations.
-
