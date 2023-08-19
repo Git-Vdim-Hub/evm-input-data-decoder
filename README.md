@@ -232,7 +232,7 @@ module.exports = {
 
 This section provides a detailed breakdown of the main functions and utility functions available in the package.
 
-## `decodeInput(input_data)`
+#### `decodeInput(input_data)`
 Purpose:
 
 To decode Ethereum transaction input data.
@@ -248,7 +248,7 @@ methodId: A string representing the first 10 characters of the input data which 
 
 params: An array containing parameters that have been extracted from the input data.
 
-## `getContractAddress(input_data)`
+#### `getContractAddress(input_data)`
 Purpose:
 
 To identify and extract the token contract address from well-known function signatures within the provided ABI encoded data. 
@@ -264,8 +264,8 @@ An object with a single key, "CA", that maps to the token contract address in th
 
 An error message stating the inability of the dependency to find the token contract address in the given input data.
 
-## Utility Functions:
-## `consoleLogDecodedInput()`
+### Utility Functions:
+#### `consoleLogDecodedInput()`
 Purpose:
 
 To decode the ABI encoded input data and print the results to the console.
@@ -273,7 +273,7 @@ To decode the ABI encoded input data and print the results to the console.
 Usage:
 
 Call the function directly without any parameters to see the decoded input printed to the console.
-## `consoleLogGetContractAddress()`
+#### `consoleLogGetContractAddress()`
 Purpose:
 
 To decode the ABI encoded input data to identify and extract the token contract address and then print either the address or an error message to the console.
