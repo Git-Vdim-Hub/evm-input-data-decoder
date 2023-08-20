@@ -26,7 +26,7 @@ Install evm-input-data-decoder with npm
 const { decodeInput, getContractAddress,consoleLogDecodedInput,consoleLogGetContractAddress } = require('evm-input-data-decoder');
 
 //example input data you want to decode
-const input = "0x7ff36ab5000000000000000000000000000000000000000000002d7c2e7091125587a8df0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee100000000000000000000000000000000000000000000000000000000601892860000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000000000000000000000003affcca64c2a6f4e3b6bd9c64cd2c969efd1ecbe" // Example input for a "transfer" function
+const input = "0x7ff36ab5000000000000000000000000000000000000000000002d7c2e7091125587a8df0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee100000000000000000000000000000000000000000000000000000000601892860000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000000000000000000000003affcca64c2a6f4e3b6bd9c64cd2c969efd1ecbe" // Example input from a transaction 
 
 
 // Decode Input Data
@@ -67,7 +67,7 @@ function consoleLogGetContractAddress() {
 
 This section provides a detailed breakdown of the main functions and utility functions available in the package.
 
-#### `decodeInput(input_data)`
+#### `decodeInput(input)`
 Purpose:
 
 To decode Ethereum transaction input data.
@@ -83,7 +83,7 @@ methodId: A string representing the first 10 characters of the input data which 
 
 params: An array containing parameters that have been extracted from the input data.
 
-#### `getContractAddress(input_data)`
+#### `getContractAddress(input)`
 Purpose:
 
 To identify and extract the token contract address from well-known function signatures within the provided ABI encoded data. 
