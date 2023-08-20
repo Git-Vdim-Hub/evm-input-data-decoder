@@ -44,9 +44,9 @@ function consoleLogDecodedInput() {
 }
 ```
 
- ```md
-    ![alt text](assets/images/output.png)
-    ```
+
+![alt text](assets/images/output.png)
+   
 
 ```javascript
 function getContractAddress(input) {
@@ -57,9 +57,9 @@ function consoleLogGetContractAddress() {
     console.log(getContractAddress(input));
 }
 ```
- ```md
-    ![alt text](assets/images/Ca.png)
-    ```
+
+![alt text](assets/images/Ca.png)
+
 
 
 ## Appendix
