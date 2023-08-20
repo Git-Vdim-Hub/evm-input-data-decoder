@@ -1,6 +1,8 @@
 # Evm-Input-Data-Decoder
 
-This npm package helps decode Ethereum transaction input data and extracts token contract addresses from well-known function signatures. The library uses Web3.js under the hood, allowing users to interpret the ABI-encoded data to make sense of contract interactions.
+This npm package helps decode Ethereum transaction input data you get when making a call to etherscan or another evm scanner api with a similar URL to this:
+[wallet address transactions](https://api.etherscan.io/api?module=account&action=txlist&address=0x977223Ef93b8490E8E6d2dC28567360F489A3EE1&startblock=0&endblock=99999999&sort=asc&apikey=YourApiKeyToken). If you look closely at the data, you will see that the transactions that interact with contract addresses have an encoded input field. This package helps decode that input field and extract the method id and parameters. It also identifies and extracts the token contract address from well-known function signatures. The library uses Web3.js under the hood, allowing users to interpret the ABI-encoded data to make sense of contract interactions.
+
 
 
 ## Features

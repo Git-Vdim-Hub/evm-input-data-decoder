@@ -1,7 +1,7 @@
 {
   "name": "evm-input-data-decoder",
-  "version": "1.0.4",
-  "description": "Takes in the input of an EVM transaction, re-orders it into an object with a methodID and an array with each index of up to 64 characters. Then it can console log and return that object. Finally, it can search the object for a unique contract address using the wallet address as the argument variable.",
+  "version": "1.0.5",
+  "description": "Takes in the input of an EVM transaction, re-orders it into an object with a methodID and an array with each index of up to 64 characters. Then it can console log and return that object. Finally, it can search the object for a unique contract address using the wallet address and transaction input data as the argument variables.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,9 @@
     "decrypt",
     "eth",
     "blockchain",
-    "ethereum"
+    "ethereum",
+    "contract address",
+    "wallet address"
   ],
   "author": "Vadim Race (https://github.com/Git-Vdim-Hub)",
   "license": "ISC",
