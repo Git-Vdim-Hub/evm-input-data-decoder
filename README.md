@@ -38,19 +38,19 @@ const decoder = require('evm-input-data-decoder');
 const input = "0x7ff36ab5000000000000000000000000000000000000000000002d7c2e7091125587a8df0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee100000000000000000000000000000000000000000000000000000000601892860000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000000000000000000000003affcca64c2a6f4e3b6bd9c64cd2c969efd1ecbe" // Example input from a transaction 
 
 
-// Decode Input Data
+// Console Log Decoded Input Data
 decoder.consoleLogDecodedInput(input)
 
-// Get Contract Address
+// Console Log Contract Address
 decoder.consoleLogGetContractAddress(input)
 
+//decodes the transaction input data
 decoder.decodeInput(input)
 //returns an object of methodId String and input parameters Array
 
-
-function consoleLogDecodedInput(input) {
-    console.log(decodeInput(input))
-}
+//gets the contract address
+decoder.getContractAddress(input)
+//returns CA: Contract Address
 ```
 ```javascript
 //DESTRUCTURING METHOD
@@ -61,30 +61,24 @@ const { decodeInput, getContractAddress,consoleLogDecodedInput,consoleLogGetCont
 const input = "0x7ff36ab5000000000000000000000000000000000000000000002d7c2e7091125587a8df0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee100000000000000000000000000000000000000000000000000000000601892860000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000000000000000000000003affcca64c2a6f4e3b6bd9c64cd2c969efd1ecbe" // Example input from a transaction 
 
 
-// Decode Input Data
+// Console Logs Decoded Input Data
 consoleLogDecodedInput(input)
 
-// Get Contract Address
+// Console Logs Contract Address Data
 consoleLogGetContractAddress(input)
 
+//decodes the transaction input data
 decodeInput(input)
 //returns an object of methodId String and input parameters Array
 
-function consoleLogDecodedInput(input) {
-    console.log(decodeInput(input))
-}
+//gets the contract address
+getContractAddress(input)
+//returns CA: Contract Address
+
 ```
 
 ![alt text](assets/images/output.png)
- ```javascript  
-function getContractAddress(input) {
-//returns CA: Contract Address
-}
-//console logs contract address
-function consoleLogGetContractAddress(input) {
-    console.log(getContractAddress(input));
-}
-```
+
 ![alt text](assets/images/Ca.png)
 
 
@@ -145,9 +139,9 @@ Call the function directly without any parameters to see the extracted token con
 
 ## Contributors
 
-- [Vadim](https://github.com/Git-Vdim-Hub)
-- [Rony](https://github.com/moofazzel)
-- [Nowrin](https://github.com/BubbleNowrin)
+- [Vadim Race](https://github.com/Git-Vdim-Hub)
+- [Mofazzel Hossen](https://github.com/moofazzel)
+- [Nowrin Islam Mim](https://github.com/BubbleNowrin)
 
 ## License
 
