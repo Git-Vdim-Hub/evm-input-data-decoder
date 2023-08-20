@@ -1,11 +1,5 @@
 const Web3 = require('web3');
 
-const input = "0xa9059cbb000000000000000000000000d29d9809dca47c042cf05e81ed89bf3575a19ed20000000000000000000000000000000000000000000000015feb38d41d13ceea" // Example input for a "transfer" function
-
-consoleLogDecodedInput();
-
-const tokenAddress = getContractAddress(input);
-
 function decodeInput(input_data) {
     const methodId = input_data.slice(0, 10);
     const params = [];
@@ -20,17 +14,21 @@ function decodeInput(input_data) {
     };
 }
 
-function consoleLogDecodedInput() {
+function consoleLogDecodedInput(input) {
     console.log(decodeInput(input))
 }
 
 function getContractAddress(input_data) {
-    let tokenAddress = null;
 
     // Check for swapETHForExactTokens(uint256 amountOut, address[] path, address to, uint256 deadline)
     if (input_data.startsWith('0xfb3bdb41')) {
         const tokenAddress = '0x' + input_data.slice(-40);
-        return tokenAddress;
+        if (tokenAddress) {
+            return { "CA": tokenAddress };
+        }
+        else {
+            return "This dependency unable to find the token contract address in the given input data";
+        }
     }
 
     // Check for swapTokensForExactTokens(uint256 amountOut, uint256 amountInMax, address[] path, address to, uint256 deadline)
@@ -51,10 +49,9 @@ function getContractAddress(input_data) {
         const tokenAddress = pathArray[pathArray.length - 1]; // Last address in path may be the token contract address
 
         if (tokenAddress) {
-            return tokenAddress;
+            return { "CA": tokenAddress };
         } else {
-            console.log("Unable to find the token contract address in the given input data");
-            return null;
+            return "This dependency unable to find the token contract address in the given input data";
         }
     }
 
@@ -72,9 +69,9 @@ function getContractAddress(input_data) {
 
         if (Array.isArray(params['1']) && params['1'].length > 0) {
             const tokenAddress = params['1'][params['1'].length - 1]; // Last address in path
-            return tokenAddress;
+            return { "CA": tokenAddress };
         } else {
-            console.log("Unable to find the token contract address in the given input data");
+            return "This dependency unable to find the token contract address in the given input data";
         }
     }
 
@@ -96,7 +93,11 @@ function getContractAddress(input_data) {
 
         // params will now contain the values for amountIn, amountOutMin, path, to, and deadline
         const tokenAddress = params[2][params[2].length - 1]; // Last address in path may be the token contract address
-        return tokenAddress;
+        if (tokenAddress) {
+            return { "CA": tokenAddress };
+        } else {
+            return "This dependency unable to find the token contract address in the given input data";
+        }
     }
 
     // Check for swapExactTokensForETH(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline)
@@ -109,7 +110,11 @@ function getContractAddress(input_data) {
         // Check if the path array exists and is not empty
         if (params[2] && Array.isArray(params[2]) && params[2].length > 0) {
             const tokenAddress = params[2][0]; // First address in path is the token contract address
-            return tokenAddress;
+            if (tokenAddress) {
+                return { "CA": tokenAddress };
+            } else {
+                return "This dependency unable to find the token contract address in the given input data";
+            }
         }
     }
 
@@ -128,7 +133,11 @@ function getContractAddress(input_data) {
         // params now contain the values for aggregatorId, tokenFrom, amount, and data
         const tokenAddress = params[1];
 
-        return tokenAddress;
+        if (tokenAddress) {
+            return { "CA": tokenAddress };
+        } else {
+            return "This dependency unable to find the token contract address in the given input data";
+        }
     }
 
     // check for swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline)
@@ -140,7 +149,11 @@ function getContractAddress(input_data) {
 
         if (params[2] && Array.isArray(params[2]) && params[2].length > 0) {
             const tokenAddress = params[2][0]; // First address in the path array
-            return tokenAddress;
+            if (tokenAddress) {
+                return { "CA": tokenAddress };
+            } else {
+                return "This dependency unable to find the token contract address in the given input data";
+            }
         }
     }
 
@@ -154,7 +167,11 @@ function getContractAddress(input_data) {
 
         if (params[2] && Array.isArray(params[2]) && params[2].length > 0) {
             const tokenAddress = params[2][0]; // First address in the path array
-            return tokenAddress;
+            if (tokenAddress) {
+                return { "CA": tokenAddress };
+            } else {
+                return "This dependency unable to find the token contract address in the given input data";
+            }
         }
     }
 
@@ -166,38 +183,26 @@ function getContractAddress(input_data) {
         );
 
         const tokenAddress = params[2]; // Address of the 'stable' parameter
-        return tokenAddress;
+        if (tokenAddress) {
+            return { "CA": tokenAddress };
+        } else {
+            return "This dependency unable to find the token contract address in the given input data";
+        }
     }
-
-    // Check for `transfer(address _to, uint256 _value)`
-    // if (input_data.startsWith('0xa9059cbb')) {
-    //     const tokenAddress = '0x' + input_data.slice(34, 74);
-    //     return tokenAddress;
-    // }
-
-    // Check for `setApprovalForAll(address operator, bool authorized)`
-    // if (input_data.startsWith('0xa22cbfa3')) {
-    //     const tokenAddress = '0x' + input_data.slice(34, 74);
-    //     return tokenAddress;
-    // }
-
-
 
     // If you have additional function signatures, add them here...
 
     // If none of the known function signatures are found
-    return null;
+    return "This dependency unable to find the token contract address in the given input data";
 }
 
-if (tokenAddress) {
-    console.log('Token Contract Address:', tokenAddress);
-} else {
-    console.log('Dependency does not support this transaction');
+function consoleLogGetContractAddress(input) {
+    console.log(getContractAddress(input));
 }
-
 
 module.exports = {
     decodeInput,
     consoleLogDecodedInput,
-    getContractAddress
+    getContractAddress,
+    consoleLogGetContractAddress
 }
