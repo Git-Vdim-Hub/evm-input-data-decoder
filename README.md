@@ -43,7 +43,9 @@ function consoleLogDecodedInput() {
     console.log(decodeInput(input))
 }
 ```
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+```md
+    ![alt text](./images/output%20(1).png)
+```
 
 ```javascript
 function getContractAddress(input) {
@@ -54,7 +56,9 @@ function consoleLogGetContractAddress() {
     console.log(getContractAddress(input));
 }
 ```
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+```md
+    ![alt text](./images/Ca.png)
+```
 
 
 ## Appendix
@@ -113,9 +117,9 @@ Call the function directly without any parameters to see the extracted token con
 
 ## Contributors
 
-[Vadim](https://github.com/Git-Vdim-Hub)
-[Rony](https://github.com/moofazzel)
-[Nowrin](https://github.com/BubbleNowrin)
+- [Vadim](https://github.com/Git-Vdim-Hub)
+- [Rony](https://github.com/moofazzel)
+- [Nowrin](https://github.com/BubbleNowrin)
 
 ## License
 
