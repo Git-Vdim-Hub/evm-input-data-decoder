@@ -44,7 +44,7 @@ function consoleLogDecodedInput() {
 }
 ```
 ```md
-    ![alt text](./images/output%20(1).png)
+    ![alt text](assets/images/output%20(1).png)
 ```
 
 ```javascript
@@ -57,7 +57,7 @@ function consoleLogGetContractAddress() {
 }
 ```
 ```md
-    ![alt text](./images/Ca.png)
+    ![alt text](assets/images/Ca.png)
 ```
 
 
