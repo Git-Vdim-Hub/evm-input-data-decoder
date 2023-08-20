@@ -7,7 +7,16 @@ This npm package helps decode Ethereum transaction input data and extracts token
 
 - Decode Input: Extracts method id and parameters from input string from an EVM transaction.
 - Console log Decode Input: console logs extracted method id and parameters.
-- Get Contract Address: Identifies and extracts the token contract address from a variety of well-known function signatures including (swapETHForExactTokens(uint256 amountOut, address[] path, address to, uint256 deadline),swapTokensForExactTokens(uint256 amountOut, uint256 amountInMax, address[] path, address to, uint256 deadline),swapExactETHForTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline),swapExactTokensForTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline),swapExactTokensForETH(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline),swap(string aggregatorId, address tokenFrom, uint256 amount, bytes data),swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline),swapExactTokensForETHSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline),swapExactTempleForStable(uint256 amountIn, uint256 amountOutMin, address stable, address to, uint256 deadline)).
+- Get Contract Address: Identifies and extracts the token contract address from a variety of well-known function signatures including (
+    - swapETHForExactTokens(uint256 amountOut, address[] path, address to, uint256 deadline),
+    - swapTokensForExactTokens(uint256 amountOut, uint256 amountInMax, address[] path, address to, uint256 deadline),
+    - swapExactETHForTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline),
+    - swapExactTokensForTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline),
+    - swapExactTokensForETH(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline),
+    - swap(string aggregatorId, address tokenFrom, uint256 amount, bytes data), 
+    - swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline),
+    - swapExactTokensForETHSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline),
+    - swapExactTempleForStable(uint256 amountIn, uint256 amountOutMin, address stable, address to, uint256 deadline)).
 - Console log Contract Address: console logs extracted contract address.
 
 
