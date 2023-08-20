@@ -22,8 +22,8 @@ Install evm-input-data-decoder with npm
 ## Usage/Examples
 
 ```javascript
-//Initialize
-const Web3 = require('web3');
+// Import the necessary functions or features from the package
+const { decodeInput, getContractAddress,consoleLogDecodedInput,consoleLogGetContractAddress } = require('evm-input-data-decoder');
 
 //example input data you want to decode
 const input = "0x7ff36ab5000000000000000000000000000000000000000000002d7c2e7091125587a8df0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000977223ef93b8490e8e6d2dc28567360f489a3ee100000000000000000000000000000000000000000000000000000000601892860000000000000000000000000000000000000000000000000000000000000002000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000000000000000000000003affcca64c2a6f4e3b6bd9c64cd2c969efd1ecbe" // Example input for a "transfer" function
@@ -34,8 +34,9 @@ consoleLogDecodedInput()
 
 // Get Contract Address
 consoleLogGetContractAddress()
+```
 
-
+```javascript
 decodeInput(input)
 //returns an object of methodId String and input parameters Array
 
