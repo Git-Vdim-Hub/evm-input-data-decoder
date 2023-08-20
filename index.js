@@ -14,7 +14,7 @@ function decodeInput(input_data) {
     };
 }
 
-function consoleLogDecodedInput() {
+function consoleLogDecodedInput(input) {
     console.log(decodeInput(input))
 }
 
@@ -196,7 +196,7 @@ function getContractAddress(input_data) {
     return "This dependency unable to find the token contract address in the given input data";
 }
 
-function consoleLogGetContractAddress() {
+function consoleLogGetContractAddress(input) {
     console.log(getContractAddress(input));
 }
 
